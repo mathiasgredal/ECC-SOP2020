@@ -1,0 +1,35 @@
+Systemer at implementere:
+  - En wrapper omkring mini-gmp, som overskriver de normale c++ operationer med multipræcisions operationerne.
+  - En ECPoint klasse, som også har overskrevet plus og gange operationer med de tilhørende algoritmer.
+
+
+ECPoint:
+    - X
+	- Y
+	- Kurven som punktet er defineret i.
+	- Overskriv <<, + og * operationen
+
+ECCurve:
+    - A
+	- B
+	- P
+	- Generator punkt
+	- Kurvetype: Short weierstrass(NIST eller secp) og montgomery(Curve25517)
+
+BigNum:
+    - Simple operatorer
+	- Simple matematiske operationer som eksponentiation og modulus
+	- Legendre symbolet
+	- Modulær sqrt(Tonnelli shanks)
+	- Invers modulus med brug af den udvidet euklid algoritme
+	- Double and add burde nok være ECPoint klassen, dog kunne man lave noget med templates
+
+ECC:
+    - ECDH
+	- ElGamal
+
+Visualisering:
+    - Plot forskellige kurver for både finite fields og de realle tal
+	- Vis addering på kurve med linje
+
+
