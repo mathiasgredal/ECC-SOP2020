@@ -11,7 +11,7 @@
 #include "ellipticcurve.h"
 #include "utility.h"
 
-#include "bignum.h"
+#include "BigNum.h"
 
 using namespace std;
 using namespace matplot;

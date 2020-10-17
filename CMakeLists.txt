@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(Encryption LANGUAGES CXX C)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(BUILD_EXPERIMENTAL_OPENGL_BACKEND ON)
@@ -28,7 +28,7 @@ add_executable(encryption main.cpp
 	ellipticcurve.cpp ellipticcurve.h
 	utility.cpp utility.h
 	BigNum.cpp BigNum.h
-	ECCurve.cpp ECCurve.h
-	ECPoint.cpp ECPoint.h
+        Curve.cpp Curve.h
+        Point.cpp Point.h
 	${mini-gmp_SOURCE_DIR}/mini-gmp/mini-gmp.c)
 target_link_libraries(encryption PUBLIC matplot mini-gmp matplot_opengl)

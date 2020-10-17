@@ -1,11 +1,10 @@
 #ifndef ECPOINT_H
 #define ECPOINT_H
 
-
-class ECPoint
+class Point
 {
 public:
-    ECPoint();
+    Point();
 };
 
 #endif // ECPOINT_H

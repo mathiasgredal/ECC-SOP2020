@@ -1,4 +1,4 @@
-#include "bignum.h"
+#include "BigNum.h"
 
 BigNum::BigNum()
 {
