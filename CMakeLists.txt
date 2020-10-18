@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(Encryption LANGUAGES CXX C)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(BUILD_EXPERIMENTAL_OPENGL_BACKEND ON)
@@ -14,21 +14,23 @@ CPMAddPackage(
 	GIT_TAG origin/master
 )
 
-
-CPMAddPackage(
-	NAME mini-gmp
-	GIT_REPOSITORY https://github.com/chfast/mini-gmp.git
-	GIT_TAG 95c194c8b1a475939d9fa29ff6b9a30b71dcbf48
-)
-include_directories(${mini-gmp_SOURCE_DIR}/mini-gmp)
 include_directories(${glfw3_SOURCE_DIR}/include)
 include_directories(${glad_BUILD_DIR}/include)
 
+CPMAddPackage(
+        NAME mini-gmp
+        GIT_REPOSITORY https://github.com/chfast/mini-gmp.git
+        GIT_TAG 95c194c8b1a475939d9fa29ff6b9a30b71dcbf48
+)
+include_directories(${mini-gmp_SOURCE_DIR}/mini-gmp)
+
+
 add_executable(encryption main.cpp
-	ellipticcurve.cpp ellipticcurve.h
-	utility.cpp utility.h
-	BigNum.cpp BigNum.h
+        ellipticcurve.cpp ellipticcurve.h
+        utility.cpp utility.h
+        BigNum.cpp BigNum.h
         Curve.cpp Curve.h
         Point.cpp Point.h
-	${mini-gmp_SOURCE_DIR}/mini-gmp/mini-gmp.c)
-target_link_libraries(encryption PUBLIC matplot mini-gmp matplot_opengl)
+        ${mini-gmp_SOURCE_DIR}/mini-gmp/mini-gmp.c
+)
+target_link_libraries(encryption PUBLIC matplot matplot_opengl mini-gmp)

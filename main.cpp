@@ -2,38 +2,31 @@
 
 //#define MAXBITS 40000
 //#define COUNT 900000
-#include <matplot/matplot.h>
+//#include <matplot/matplot.h>
 
-#include <matplot/backend/opengl.h>
-#include <mini-gmp.h>
-#include <set>
+//#include <matplot/backend/opengl.h>
+//#include <mini-gmp.h>
+//#include <set>
 
-#include "ellipticcurve.h"
-#include "utility.h"
+//#include "ellipticcurve.h"
+//#include "utility.h"
 
 #include "BigNum.h"
+#include "Point.h"
+#include "Curve.h"
 
 using namespace std;
-using namespace matplot;
-
-Curve initialize_nistp256()
-{
-    Curve nistp256;
-    mpz_init_set_si(nistp256.a, -3);
-    mpz_init_set_str(nistp256.b, "41058363725152142129326129780047268409114441015993725554835256314039467401291", 10);
-    mpz_init_set_str(nistp256.p, "115792089210356248762697446949407573530086143415290314195533631308867097853951", 10);
-
-    mpz_init_set_ui(nistp256.x1, 5);
-    mpz_init_set_str(nistp256.y1, "31468013646237722594854082025316614106172411895747863909393730389177298123724", 10);
-
-    return nistp256;
-}
+//using namespace matplot;
 
 int main()
 {
-    BigNum a = "31468013646237722594854082025316614106172411895747863909393730389177298123724";
+    Curve c = Curve(ShortWeierstrass, 32, 732132, 38047, Point(6, 1));
+    Point b = secp256k1.PointAdd(Point("55066263022277343669578718895168534326250603453777594175500187360389116729240" , "32670510020758816978083085130507043184471273380659243275938904335757337482424"),
+                                 Point("89565891926547004231252920425935692360644145829622209833684329913297188986597", "12158399299693830322967808612713398636155367887041628176798871954788371653930"));
 
-    std::cout << "A: " << a * a << std::endl;
+
+    std::cout << "X: " << b.x << std::endl; // 112711660439710606056748659173929673102114977341539408544630613555209775888121
+    std::cout << "Y: " << b.y << std::endl; // 25583027980570883691656905877401976406448868254816295069919888960541586679410
 
     //    Curve nistp256 = initialize_nistp256();
 
@@ -45,39 +38,39 @@ int main()
 
     //    std::cout << "Result: " << mpz_get_str(NULL, 10, public_key) << std::endl;
 
-    //    // Create figure with backend
-    //    auto f = figure<backend::opengl>(true);
-    //    auto ax = f->current_axes();
-    //    ax->xlim({ 0., 2. * pi });
-    //    ax->ylim({ -1.5, 1.5 });
-    //    ax->yticks(iota(-1.5, 0.5, +1.5));
-    //    ax->xticks(iota(0., 1., 2. * pi));
+        // Create figure with backend
+//        auto f = figure<backend::opengl>(true);
+//        auto ax = f->current_axes();
+//        ax->xlim({ 0., 2. * pi });
+//        ax->ylim({ -1.5, 1.5 });
+//        ax->yticks(iota(-1.5, 0.5, +1.5));
+//        ax->xticks(iota(0., 1., 2. * pi));
 
-    //    // Another figure
-    //    auto f2 = figure<backend::opengl>(true);
-    //    auto ax2 = f2->add_subplot(2, 1, 0);
-    //    auto ax3 = f2->add_subplot(2, 1, 1);
+//        // Another figure
+//        auto f2 = figure<backend::opengl>(true);
+//        auto ax2 = f2->add_subplot(2, 1, 0);
+//        auto ax3 = f2->add_subplot(2, 1, 1);
 
-    //    // Create plots
-    //    double seconds = backend::opengl::get_time();
-    //    std::vector<double> x = linspace(0., 2. * pi);
-    //    std::vector<double> y = transform(x, [&](auto x) { return sin(x + seconds); });
-    //    ax->hold(off);
-    //    ax->plot(x, y, "-o");
-    //    ax->hold(on);
-    //    const vector_1d minus_y = transform(y, [](auto y) { return -y; });
-    //    ax->plot(x, minus_y, "--xr");
-    //    ax->plot(x, transform(x, [](auto x) { return x / pi - 1.; }), "-:gs");
-    //    ax->plot({ 1.0, 0.7, 0.4, 0.0, -0.4, -0.7, -1 }, "k");
+//        // Create plots
+//        double seconds = backend::opengl::get_time();
+//        std::vector<double> x = linspace(0., 2. * pi);
+//        std::vector<double> y = transform(x, [&](auto x) { return sin(x + seconds); });
+//        ax->hold(off);
+//        ax->plot(x, y, "-o");
+//        ax->hold(on);
+//        const vector_1d minus_y = transform(y, [](auto y) { return -y; });
+//        ax->plot(x, minus_y, "--xr");
+//        ax->plot(x, transform(x, [](auto x) { return x / pi - 1.; }), "-:gs");
+//        ax->plot({ 1.0, 0.7, 0.4, 0.0, -0.4, -0.7, -1 }, "k");
 
-    //    // Only one line in figure 2
-    //    ax2->plot(x, y, "-o");
-    //    ax3->plot(x, minus_y, "--xr");
+//        // Only one line in figure 2
+//        ax2->plot(x, y, "-o");
+//        ax3->plot(x, minus_y, "--xr");
 
-    //    // Start rendering
-    //    while (!f->should_close() && !f2->should_close()) {
-    //        // Draw the figures
-    //        f->draw();
-    //        f2->draw();
-    //    }
+//        // Start rendering
+//        while (!f->should_close() && !f2->should_close()) {
+//            // Draw the figures
+//            f->draw();
+//            f2->draw();
+//        }
 }
