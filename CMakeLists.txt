@@ -25,12 +25,12 @@ CPMAddPackage(
 include_directories(${mini-gmp_SOURCE_DIR}/mini-gmp)
 
 
-add_executable(encryption main.cpp
-        ellipticcurve.cpp ellipticcurve.h
-        utility.cpp utility.h
-        BigNum.cpp BigNum.h
-        Curve.cpp Curve.h
-        Point.cpp Point.h
+add_executable(encryption src/main.cpp
+        src/ellipticcurve.cpp src/ellipticcurve.h
+        src/utility.cpp src/utility.h
+        src/BigNum.cpp src/BigNum.h
+        src/Curve.cpp src/Curve.h
+        src/Point.cpp src/Point.h
         ${mini-gmp_SOURCE_DIR}/mini-gmp/mini-gmp.c
 )
 target_link_libraries(encryption PUBLIC matplot matplot_opengl mini-gmp)

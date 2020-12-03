@@ -3,6 +3,7 @@
 
 #include <array>
 #include <iostream>
+#include <algorithm>
 
 #include "BigNum.h"
 #include "Point.h"

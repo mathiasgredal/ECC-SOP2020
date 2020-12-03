@@ -35,6 +35,12 @@ Point Curve::PointAdd(Point a, Point b) const
         throw std::runtime_error("ERROR: Montgomery curves not implemented");
     }
 
+    if(a.x == 0ll && a.y == 0ll)
+        return b;
+
+    if(b.x == 0ll && b.y == 0ll)
+        return a;
+
     BigNum s = (a.y - b.y) * invmod(a.x - b.x, P);
 
     BigNum cx = (powm(s, 2, P) - a.x - b.x) % P;
@@ -46,13 +52,14 @@ Point Curve::PointAdd(Point a, Point b) const
 Point Curve::DoubleAndAdd(BigNum a, Point b) const
 {
     std::string k = mpz_get_str(NULL, 2, a.bignum);
+    std::reverse(k.begin(), k.end());
 
-    Point result = { 0.f, 0.f };
+    Point result = { 0ll, 0ll };
     Point addend = b;
+    std::cout << k<< std::endl;
 
-    for (auto n : k) {
-        std::cout << n << std::endl;
-        if (n == '1')
+    for(unsigned long i = 0ll; i < k.size(); i++) {
+        if (k.at(i) == '1')
             result = this->PointAdd(result, addend);
 
         addend = this->PointDouble(addend);
