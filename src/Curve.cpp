@@ -9,7 +9,7 @@ Curve::Curve(CurveType type, const BigNum& _A, const BigNum& _B, const BigNum& _
 {
 }
 
-Point Curve::GetPoint(BigNum x)
+Point Curve::GetPoint(BigNum x) const
 {
     std::cout << "ERROR: GetPoint() NOT IMPLEMENTED" << std::endl;
     return G;
@@ -56,7 +56,6 @@ Point Curve::DoubleAndAdd(BigNum a, Point b) const
 
     Point result = { 0ll, 0ll };
     Point addend = b;
-    std::cout << k<< std::endl;
 
     for(unsigned long i = 0ll; i < k.size(); i++) {
         if (k.at(i) == '1')
@@ -66,4 +65,9 @@ Point Curve::DoubleAndAdd(BigNum a, Point b) const
     }
 
     return result;
+}
+
+Point Curve::GetGenerator() const
+{
+    return G;
 }

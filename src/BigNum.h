@@ -2,6 +2,7 @@
 #define BIGNUM_H
 
 #include <iostream>
+#include <random>
 #include <mini-gmp.h>
 
 class BigNum {
@@ -43,5 +44,6 @@ BigNum powm(const BigNum& a, const BigNum& b, const BigNum& p);
 BigNum invmod(const BigNum& a, const BigNum& p);
 BigNum LegendreSymbol(const BigNum& a, const BigNum& p);
 BigNum ModularSqrt(const BigNum& a, const BigNum& p);
+BigNum random(const BigNum& length);
 
 #endif // BIGNUM_H

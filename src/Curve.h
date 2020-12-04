@@ -15,10 +15,11 @@ class Curve {
 public:
     Curve(CurveType type, const BigNum& _A, const BigNum& _B, const BigNum& _P, const Point& G);
 
-    Point GetPoint(BigNum x);
+    Point GetPoint(BigNum x) const;
     Point PointDouble(Point a) const;
     Point PointAdd(Point a, Point b) const;
     Point DoubleAndAdd(BigNum a, Point b) const;
+    Point GetGenerator() const;
 
 private:
     const CurveType curvetype;

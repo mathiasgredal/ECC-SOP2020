@@ -22,10 +22,24 @@ int main()
 {
     Point a = Point("55066263022277343669578718895168534326250603453777594175500187360389116729240", "32670510020758816978083085130507043184471273380659243275938904335757337482424");
 
-    Point d = secp256k1.DoubleAndAdd(5, a);
+    std::cout << "Doing ECDH" << std::endl;
 
-    std::cout << "X: " << d.x << std::endl;
-    std::cout << "Y: " << d.y << std::endl;
+    BigNum bob_private = random(100);
+    std::cout << "Bobs private: " << bob_private << std::endl;
+    Point bobs_public = secp256k1.DoubleAndAdd(bob_private , secp256k1.GetGenerator());
+    std::cout << "Bobs public: " << bobs_public.x << std::endl;
+
+    BigNum alice_private = random(100);
+    std::cout << "Alice private: " << alice_private << std::endl;
+    Point alice_public = secp256k1.DoubleAndAdd(alice_private , secp256k1.GetGenerator());
+    std::cout << "Alice public: " << alice_public.x << std::endl;
+
+
+    std::cout << "Alice shared: " << secp256k1.DoubleAndAdd(alice_private , bobs_public).x << std::endl;
+    std::cout << "Bobs shared: " << secp256k1.DoubleAndAdd(bob_private , alice_public).x << std::endl;
+
+
+    //std::cout << "Y: " << d.y << std::endl;
 
     // Create figure with backend
     //        auto f = figure<backend::opengl>(true);

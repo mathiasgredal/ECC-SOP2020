@@ -215,3 +215,32 @@ BigNum invmod(const BigNum &a, const BigNum &p)
         return x % p;
     }
 }
+
+std::random_device rd;
+std::mt19937 mt(time(nullptr));
+
+///
+/// \brief Generate a random number, with the specified length in bits
+/// \param length of the generated number in bits
+/// \return
+///
+BigNum random(const BigNum &length)
+{
+    std::string out;
+
+    // If the random device is not available, then seed with the that
+    if(rd.entropy() != 0)
+        mt = std::mt19937(rd());
+
+    std::uniform_int_distribution<> dist(0, 1); // define the range
+
+    for(BigNum i = 0ll; i < length; i = i + 1) {
+        out.append(std::to_string(dist(mt)));
+    }
+
+    mpz_t binary_num;
+    mpz_init_set_str(binary_num, out.c_str(), 2);
+    BigNum integer_num = mpz_get_str(nullptr, 10, binary_num);
+
+    return integer_num;
+}
