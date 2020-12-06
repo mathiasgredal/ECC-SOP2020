@@ -35,6 +35,9 @@ Point Curve::PointAdd(Point a, Point b) const
         throw std::runtime_error("ERROR: Montgomery curves not implemented");
     }
 
+    if(a == b)
+        return PointDouble(a);
+
     if(a.x == 0ll && a.y == 0ll)
         return b;
 

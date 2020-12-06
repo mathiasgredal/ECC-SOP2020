@@ -11,9 +11,7 @@
 //#include "ellipticcurve.h"
 //#include "utility.h"
 
-#include "BigNum.h"
-#include "Curve.h"
-#include "Point.h"
+#include "ECDH.h"
 
 using namespace std;
 //using namespace matplot;
@@ -24,20 +22,22 @@ int main()
 
     std::cout << "Doing ECDH" << std::endl;
 
-    BigNum bob_private = random(100);
-    std::cout << "Bobs private: " << bob_private << std::endl;
-    Point bobs_public = secp256k1.DoubleAndAdd(bob_private , secp256k1.GetGenerator());
-    std::cout << "Bobs public: " << bobs_public.x << std::endl;
+    KeyPair alice_key = ECDH::Generate_Keypair();
+    std::cout << "ALICE KEY: " << std::endl;
+    std::cout << "\t private key: " << alice_key.priv_key << std::endl;
+    std::cout << "\t public key: " << alice_key.pub_key;
 
-    BigNum alice_private = random(100);
-    std::cout << "Alice private: " << alice_private << std::endl;
-    Point alice_public = secp256k1.DoubleAndAdd(alice_private , secp256k1.GetGenerator());
-    std::cout << "Alice public: " << alice_public.x << std::endl;
+    KeyPair bob_key = ECDH::Generate_Keypair();
+    std::cout << "BOBS KEY: " << std::endl;
+    std::cout << "\t private key: " << bob_key.priv_key << std::endl;
+    std::cout << "\t public key: " << bob_key.pub_key;
 
 
-    std::cout << "Alice shared: " << secp256k1.DoubleAndAdd(alice_private , bobs_public).x << std::endl;
-    std::cout << "Bobs shared: " << secp256k1.DoubleAndAdd(bob_private , alice_public).x << std::endl;
-
+    Point alice_shared = ECDH::Create_Shared_Key(alice_key, bob_key.pub_key);
+    Point bob_shared = ECDH::Create_Shared_Key(bob_key, alice_key.pub_key);
+    std::cout << "SHARED KEYS: " << std::endl;
+    std::cout << "ALICE: " << alice_shared;
+    std::cout << "  BOB: " << bob_shared;
 
     //std::cout << "Y: " << d.y << std::endl;
 
