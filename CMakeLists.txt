@@ -21,6 +21,6 @@ enable_testing()
 add_subdirectory(src)
 add_subdirectory(test)
 
-add_executable(main src/main.cpp)
-target_link_libraries(main encryption)
+add_executable(demo src/main.cpp)
+target_link_libraries(demo encryption)
 

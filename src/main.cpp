@@ -39,6 +39,10 @@ int main()
     std::cout << "ALICE: " << alice_shared;
     std::cout << "  BOB: " << bob_shared;
 
+    for(long long i = 0ll; i < 20; i++) {
+        std::cout << secp256k1.GetPoint(i) << std::endl;
+    }
+
     //std::cout << "Y: " << d.y << std::endl;
 
     // Create figure with backend

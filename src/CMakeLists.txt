@@ -6,9 +6,7 @@ CPMAddPackage(
 )
 include_directories(${mini-gmp_SOURCE_DIR}/mini-gmp)
 
-add_library(encryption SHARED
-        ellipticcurve.cpp ellipticcurve.h
-        utility.cpp utility.h
+add_library(encryption
         BigNum.cpp BigNum.h
         Curve.cpp Curve.h
         Point.cpp Point.h

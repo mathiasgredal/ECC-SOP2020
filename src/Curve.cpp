@@ -11,8 +11,14 @@ Curve::Curve(CurveType type, const BigNum& _A, const BigNum& _B, const BigNum& _
 
 Point Curve::GetPoint(BigNum x) const
 {
-    std::cout << "ERROR: GetPoint() NOT IMPLEMENTED" << std::endl;
-    return G;
+    BigNum val = ((x*x*x) + A*x+ B) % P;
+    BigNum rtn = LegendreSymbol(val, P);
+    if (rtn==1){
+        BigNum res = ModularSqrt(val, P);
+       return Point(x, res);
+    }
+
+    return Point(0ll, 0ll);
 }
 
 Point Curve::PointDouble(Point a) const
