@@ -5,32 +5,23 @@ project(Encryption LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(BUILD_EXPERIMENTAL_OPENGL_BACKEND ON)
+#include(cmake/CPM.cmake)
 
-include(cmake/CPM.cmake)
-CPMAddPackage(
-	NAME matplotplusplus
-	GITHUB_REPOSITORY alandefreitas/matplotplusplus
-	GIT_TAG origin/master
-)
+#set(BUILD_EXPERIMENTAL_OPENGL_BACKEND ON)
+#CPMAddPackage(
+#	NAME matplotplusplus
+#	GITHUB_REPOSITORY alandefreitas/matplotplusplus
+#	GIT_TAG origin/master
+#)
 
-include_directories(${glfw3_SOURCE_DIR}/include)
-include_directories(${glad_BUILD_DIR}/include)
+#include_directories(${glfw3_SOURCE_DIR}/include)
+#include_directories(${glad_BUILD_DIR}/include)
 
-CPMAddPackage(
-        NAME mini-gmp
-        GIT_REPOSITORY https://github.com/chfast/mini-gmp.git
-        GIT_TAG 95c194c8b1a475939d9fa29ff6b9a30b71dcbf48
-)
-include_directories(${mini-gmp_SOURCE_DIR}/mini-gmp)
+enable_testing()
+add_subdirectory(src)
+add_subdirectory(test)
+
+add_executable(main src/main.cpp)
+target_link_libraries(main encryption)
 
 
-add_executable(encryption src/main.cpp
-        src/ellipticcurve.cpp src/ellipticcurve.h
-        src/utility.cpp src/utility.h
-        src/BigNum.cpp src/BigNum.h
-        src/Curve.cpp src/Curve.h
-        src/Point.cpp src/Point.h
-        ${mini-gmp_SOURCE_DIR}/mini-gmp/mini-gmp.c
-)
-target_link_libraries(encryption PUBLIC matplot matplot_opengl mini-gmp)
