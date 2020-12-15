@@ -11,6 +11,10 @@ Curve::Curve(CurveType type, const BigNum& _A, const BigNum& _B, const BigNum& _
 
 Point Curve::GetPoint(BigNum x) const
 {
+    if (curvetype == Montgomery) {
+        throw std::runtime_error("ERROR: Montgomery curves not implemented");
+    }
+
     BigNum val = ((x*x*x) + A*x+ B) % P;
     BigNum rtn = LegendreSymbol(val, P);
     if (rtn==1){
