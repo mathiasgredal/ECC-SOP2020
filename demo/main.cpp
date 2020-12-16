@@ -2,22 +2,22 @@
 #include <random>
 #include <cmath>
 
-#define MAXBITS 40000
-#define COUNT 900000
-#include <matplot/matplot.h>
-#include <matplot/backend/opengl.h>
+//#define MAXBITS 40000
+//#define COUNT 900000
+//#include <matplot/matplot.h>
+//#include <matplot/backend/opengl.h>
 
 #include "ECDH.h"
 
 using namespace std;
-using namespace matplot;
+//using namespace matplot;
 
-double wrap(double a, double low, double high) {
-    if (a < low)
-        return high - std::fmod(low - a, (high - low));
-    else
-        return low + std::fmod(a - low, high - low);
-}
+//double wrap(double a, double low, double high) {
+//    if (a < low)
+//        return high - std::fmod(low - a, (high - low));
+//    else
+//        return low + std::fmod(a - low, high - low);
+//}
 
 int main()
 {
